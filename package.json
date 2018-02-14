@@ -1,10 +1,11 @@
 {
-  "name": "TDD",
+  "name": "@charlesy712/complete-me",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "trie.js",
   "directories": {
-    "test": "tests"
+    "test": "tests",
+    "lib": "lib"
   },
   "scripts": {
     "test": "mocha --compilers js:babel-core/register tests",
