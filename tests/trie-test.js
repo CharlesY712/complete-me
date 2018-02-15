@@ -1,10 +1,9 @@
 import { expect } from 'chai';
-import Node from '../lib/node'
-import Trie from '../lib/trie'
+import Trie from '../lib/trie';
 import fs from 'fs';
 
-const text = "/usr/share/dict/words"
-const dictionary = fs.readFileSync(text).toString().trim().split('\n')
+const text = "/usr/share/dict/words";
+const dictionary = fs.readFileSync(text).toString().trim().split('\n');
 
 describe('Trie', () => {
   let trie;
@@ -30,10 +29,10 @@ describe('Trie', () => {
       trie.insert('cat');
       trie.insert('cats');
 
-      expect(trie.children['c'].completeWord).to.equal(0)
-      expect(trie.children['c'].children['a'].completeWord).to.equal(0)
-      expect(trie.children['c'].children['a'].children['t'].completeWord).to.equal(1)
-      expect(trie.children['c'].children['a'].children['t'].children['s'].completeWord).to.equal(1)
+      expect(trie.children['c'].completeWord).to.equal(0);
+      expect(trie.children['c'].children['a'].completeWord).to.equal(0);
+      expect(trie.children['c'].children['a'].children['t'].completeWord).to.equal(1);
+      expect(trie.children['c'].children['a'].children['t'].children['s'].completeWord).to.equal(1);
     });
  
     it('should increment the number of words', () => {
@@ -46,7 +45,7 @@ describe('Trie', () => {
   });
 
   describe('Suggest', () => {
-   it('should return an array of suggested words', () => {
+    it('should return an array of suggested words', () => {
       trie.insert('pize');
       trie.insert('pizza');
       trie.insert('pizzeria');
@@ -54,23 +53,23 @@ describe('Trie', () => {
       trie.insert('pizzle');
 
       expect(trie.suggest('piz')).to.deep.equal([ 'pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle' ]);
-    })
+    });
   });
 
   describe('Populate', () => {
     it('should populate a dictionary of words', () => {
-      expect(trie.numberOfWords).to.equal(0)
+      expect(trie.numberOfWords).to.equal(0);
 
       trie.populate(dictionary);
 
-      expect(trie.numberOfWords).to.equal(235886)      
-    })
+      expect(trie.numberOfWords).to.equal(235886);     
+    });
 
     it('should suggest words from the dictionary', () => {
       trie.populate(dictionary);
 
       expect(trie.suggest('piz')).to.deep.equal([ 'pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle' ]);
-    })
+    });
   });
 
   describe('Select', () => {
