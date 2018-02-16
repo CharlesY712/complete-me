@@ -27,6 +27,7 @@ describe('Trie', () => {
   describe('Insert', () => {
     it('should create keys in children object of first letter', () => {
       trie.insert('cat');
+      trie.insert('cat');
       trie.insert('cats');
 
       expect(trie.children['c'].completeWord).to.equal(0);
@@ -37,6 +38,10 @@ describe('Trie', () => {
  
     it('should increment the number of words', () => {
       expect(trie.numberOfWords).to.equal(0);
+
+      trie.insert('pizza');
+
+      expect(trie.numberOfWords).to.equal(1);
 
       trie.insert('pizza');
 
@@ -53,6 +58,8 @@ describe('Trie', () => {
       trie.insert('pizzle');
 
       expect(trie.suggest('piz')).to.deep.equal([ 'pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle' ]);
+
+      expect(trie.suggest('e')).to.deep.equal([]);
     });
   });
 
@@ -73,19 +80,21 @@ describe('Trie', () => {
   });
 
   describe('Select', () => {
-    it('should prioritize selected words', () => {
+    it('should prioritize selected words by incrementing the populartiy counter', () => {
       trie.populate(dictionary);
 
+      expect(trie.traverse('pizzeria').populartiy).to.equal(0);
       expect(trie.suggest('piz')).to.deep.equal([ 'pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle' ]);
 
       trie.select("pizzeria");
 
+      expect(trie.traverse('pizzeria').populartiy).to.equal(1);
       expect(trie.suggest("piz")).to.deep.equal(["pizzeria", "pize", "pizza", "pizzicato", "pizzle", ]);
     });
   });
 
   describe('Delete', () => {
-    it('should delete words', () => {
+    it('should prevent words from being suggested', () => {
       trie.populate(dictionary);
 
       expect(trie.suggest('piz')).to.deep.equal([ 'pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle' ]);
