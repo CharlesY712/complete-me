@@ -1,11 +1,10 @@
 {
   "name": "@charlesy712/complete-me",
   "version": "1.0.0",
-  "description": "",
   "main": "trie.js",
   "directories": {
-    "test": "tests",
-    "lib": "lib"
+    "lib": "lib",
+    "test": "tests"
   },
   "scripts": {
     "test": "mocha --compilers js:babel-core/register tests",
@@ -24,5 +23,15 @@
     "eslint": "^4.9.0",
     "mocha": "^3.4.2",
     "webpack": "^3.3.0"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlesY712/complete-me.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CharlesY712/complete-me/issues"
+  },
+  "homepage": "https://github.com/CharlesY712/complete-me#readme",
+  "description": ""
 }
